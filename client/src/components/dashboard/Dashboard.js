@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropoTypes from 'prop-types';
-import { getCurrentProfile } from '../../actions/profileActions'
+import { getCurrentProfile, deleteAccount } from '../../actions/profileActions'
 import Spinner from '../common/Spinner'
 import { Link } from 'react-router-dom'
-
+import ProfileActions from './ProfileActions'
 
 class Dashboard extends Component {
 
     componentDidMount() {
         this.props.getCurrentProfile();
     }
-
+    onDeleteClick(e) {
+        this.props.deleteAccount()
+    }
     render() {
         const { user } = this.props.auth;
         const { profile, loading } = this.props.profile;
@@ -22,7 +24,15 @@ class Dashboard extends Component {
             dashboardContent = <Spinner />
         } else {
             if (Object.keys(profile).length > 0) {
-                dashboardContent = <h4>todo</h4>
+                dashboardContent = (
+                    <div>
+                        <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link></p>
+                        <ProfileActions />
+                        {/* ToDO exp and edu*/}
+                        <div style={{ marginBottom: '60px' }} />
+                        <button className="btn btn-danger" onClick={this.onDeleteClick.bind(this)}>Delete My Account</button>
+                    </div>
+                )
             } else {
 
                 dashboardContent = (<div className="lead text-muted">Welcome {user.name}
@@ -56,6 +66,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     getCurrentProfile: PropoTypes.func.isRequired,
+    deleteAccount: PropoTypes.func.isRequired,
     auth: PropoTypes.object.isRequired,
     profile: PropoTypes.object.isRequired
 }
@@ -65,4 +76,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard)
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard)
