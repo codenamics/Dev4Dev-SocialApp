@@ -21,6 +21,7 @@ import './styles/theme.scss'
 import { clearCurrentProfile } from './actions/profileActions'
 import Profiles from './components/profiles/Profiles'
 import Profile from './components/profile/Profile'
+import NotFound from './components/not-found/NotFound'
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken)
@@ -79,6 +80,7 @@ class App extends React.Component {
                   component={AddEducation}
                 />
               </Switch>
+              <Route exact path='/not-found' component={NotFound} />
             </div>
             <Footer />
           </div>
