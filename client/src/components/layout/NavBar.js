@@ -22,6 +22,9 @@ class NavBar extends Component {
           <Link className='nav-link' to='/dashboard'>Dashboard</Link>
         </li>
         <li className='nav-item'>
+          <Link className='nav-link' to='/feed'>Post Feed</Link>
+        </li>
+        <li className='nav-item'>
           <a
             className='nav-link'
             href=''
