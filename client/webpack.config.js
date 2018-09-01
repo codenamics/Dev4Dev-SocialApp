@@ -1,8 +1,8 @@
-const webpack = require('webpack');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const path = require('path');
-
+const webpack = require('webpack')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const autoprefixer = require('autoprefixer')
+const path = require('path')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -11,32 +11,29 @@ module.exports = {
   entry: ['react-dev-utils/webpackHotDevClient', path.resolve('src/index.js')],
 
   resolve: {
-    modules: [
-      path.resolve('src'),
-      path.resolve('node_modules'),
-    ],
-    extensions: ['.js', '.jsx'],
+    modules: [path.resolve('src'), path.resolve('node_modules')],
+    extensions: ['.js', '.jsx']
   },
 
   output: {
     path: path.resolve('.tmp'),
     filename: '[name].js',
-    publicPath: '/',
+    publicPath: '/'
   },
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new CaseSensitivePathsPlugin(),
     new HTMLWebpackPlugin({
-      template: path.resolve('public/index.html'),
-    }),
+      template: path.resolve('public/index.html')
+    })
   ],
 
   devServer: {
     contentBase: '.tmp',
     hot: true,
     port: 3000,
-    historyApiFallback: true,
-
+    historyApiFallback: true
   },
 
   module: {
@@ -48,9 +45,9 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
-            plugins: ['react-hot-loader/babel'],
-          },
-        },
+            plugins: ['react-hot-loader/babel']
+          }
+        }
       },
       {
         test: /\.(scss|sass)$/,
@@ -59,8 +56,8 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
-            },
+              sourceMap: true
+            }
           },
           {
             loader: 'postcss-loader',
@@ -72,19 +69,19 @@ module.exports = {
                     '>1%',
                     'last 4 versions',
                     'Firefox ESR',
-                    'not ie < 10',
-                  ],
-                }),
-              ],
-            },
+                    'not ie < 10'
+                  ]
+                })
+              ]
+            }
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true,
-            },
-          },
-        ],
+              sourceMap: true
+            }
+          }
+        ]
       },
       {
         test: /\.(jpe?g|png|gif|ico)$/i,
@@ -92,11 +89,11 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
+              name: '[name].[ext]'
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
