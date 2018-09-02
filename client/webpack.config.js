@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+
 
 module.exports = {
   mode: 'development',
@@ -23,7 +23,7 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new CaseSensitivePathsPlugin(),
+
     new HTMLWebpackPlugin({
       template: path.resolve('public/index.html')
     })
@@ -37,8 +37,7 @@ module.exports = {
   },
 
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -51,8 +50,9 @@ module.exports = {
       },
       {
         test: /\.(scss|sass)$/,
-        use: [
-          { loader: 'style-loader' },
+        use: [{
+            loader: 'style-loader'
+          },
           {
             loader: 'css-loader',
             options: {
@@ -85,14 +85,12 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|ico)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]'
-            }
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]'
           }
-        ]
+        }]
       }
     ]
   }
